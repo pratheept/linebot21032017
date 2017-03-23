@@ -17,9 +17,9 @@ app.post('/webhook', (req, res) => {
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
   if (text === 'สวัสดี' || text === 'hi' || text === 'hello') {
-    sendText(sender, text)
+    sendText(sender, 'สวัสดี')
   }	else {
-    sendTextHi(sender, text)
+    sendText(sender, text)
   }
   res.sendStatus(200)
 })
@@ -30,33 +30,7 @@ function sendText (sender, text) {
     messages: [
       {
         type: 'text',
-        text: 'สวัสดี test line bot'
-      }
-    ]
-  }
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'm1acoiJNaMXcOpDiK+AnG3P3660Q+Bh1KUuBobdEMglh10EKPcfVbKsL03WUeJwXDKlK/2cElR91wMR+zUSINxLLU6FEst4k+GqEDsAevoVGThWQOCkG90pvbI+1U9OGWCKURbrlCyEq9JMiLo5viQdB04t89/1O/w1cDnyilFU='
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    method: 'POST',
-    body: data,
-    json: true
-  }, function (err, res, body) {
-    if (err) console.log('error')
-    if (res) console.log('success')
-    if (body) console.log(body)
-  })
-}
-
-function sendTextHi (sender, text) {
-  let data = {
-    to: sender,
-    messages: [
-      {
-        type: 'text',
-        text: 'Hello world'
+        text: text
       }
     ]
   }
